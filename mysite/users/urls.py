@@ -33,3 +33,4 @@ urlpatterns = [
         views.createMessage, name='create-message'),
 
 ]
+

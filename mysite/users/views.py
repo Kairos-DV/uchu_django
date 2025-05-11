@@ -88,7 +88,7 @@ def loginUser(request):
 def logoutUser(request):
     logout(request)
     messages.info(request, 'Вы вышли из учетной записи')
-    return redirect('login')
+    return redirect('users:login')
 
 
 def registerUser(request):
@@ -106,11 +106,11 @@ def registerUser(request):
                 'Аккаунт успешно создан!')
 
             login(request, user)
-            return redirect('edit-account')
+            return redirect('users:edit-account')
 
         else:
             messages.success(request, 
-                'Во время регистрации возникла ошибка')
+                'Во время регистрации возникла ошибка' )#+ form.data)
 
     context = {'page': page, 'form': form}
     return render(request, 
@@ -166,7 +166,7 @@ def editAccount(request):
         if form.is_valid():
             form.save()
 
-            return redirect('account')
+            return redirect('users:account')# return redirect('account')
     context = {'form': form}
  
     return render(request, 
@@ -232,7 +232,7 @@ def inbox(request):
     profile = request.user.profile
     messageRequests = profile.messages.all()
     unreadCount = messageRequests.filter(is_read=False).count()
-    context = {'messageRequests': messageRequests, 
+    context = {'messageRequests': messageRequests,
     'unreadCount': unreadCount}
     return render(request, 'users/inbox.html', context)
 
@@ -244,7 +244,7 @@ def viewMessage(request, pk):
     if message.is_read is False:
         message.is_read = True
         message.save()
-    context = {'message': message}
+    context = {'users:message': message}
     return render(request, 'users/message.html', context)
 
 
@@ -272,7 +272,7 @@ def createMessage(request, username):
 
             messages.success(request, 
                 'Сообщение успешно отправлено!')
-            return redirect('user-profile', 
+            return redirect('users:user-profile',
                 username=recipient.username)
 
     context = {'recipient': recipient, 'form': form}

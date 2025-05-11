@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>Добро пожаловать на сайт!</h1>
-    <a href="{% url 'polls:index' %}">Опросы</a>
-    <a href="{% url 'users:profiles' %}">Профиль</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <section class="py-0">
+        <div class="bg-holder"
+             style="background-image:url(static/assets/img/illustrations/bg.png);
+                    background-position:left center;
+                    background-size:auto 816px">
+        </div>
+        <h1>Добро пожаловать на сайт!</h1>
+        <a href="{% url 'polls:index1' %}">Опросы</a>
+        <a href="{% url 'users:profiles' %}">Профиль</a>
+    </section>
+{% endblock %}

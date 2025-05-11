@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-    {{ question }}
+    <section class="py-0">
+        <div class="bg-holder"
+             style="background-image:url(static/assets/img/illustrations/bg.png);
+                    background-position:left center;
+                    background-size:auto 816px">
+        </div>
+        <h1>frends.html!</h1>
+        <a href="{% url 'polls:index' %}">Опросы</a>
+        <a href="{% url 'users:profiles' %}">Профиль</a>
+    </section>
 </body>
 </html>

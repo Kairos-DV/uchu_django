@@ -37,14 +37,14 @@
                                         <h5 class="fw-bold fs-2 text-200 my-3 text-center">{{ profile.name }}</h5>
                                         <div class="profile-image-wrapper">
                                             <div class="profile-image">
-                                                <a href="{% url 'user-profile' profile.username %}">
+                                                <a href="{% url 'users:user-profile' profile.username %}">
                                                     <img src="{{ profile.image.url }}" alt="profile" />
                                                 </a>
                                             </div>
                                         </div>
                                         <p>{{ profile.summary }}</p>
                                         <div class="d-flex justify-content-between">
-                                            <form action="{% url 'follow-unfollow' profile.username %}" method="POST">
+                                            <form action="{% url 'users:follow-unfollow' profile.username %}" method="POST">
                                                 {% csrf_token %}
                                                 {% if profile in user.profile.follows.all %}
                                                     <span class="text-start">
@@ -62,7 +62,7 @@
                                             </form>
                                             <span class="text-end">
                                                 <a class="btn btn-primary rounded-pill btn-md"
-                                                   href="{% url 'create-message' profile.username %}">Сообщение</a>
+                                                   href="{% url 'users:create-message' profile.username %}">Сообщение</a>
                                             </span>
                                         </div>
                                     </div>

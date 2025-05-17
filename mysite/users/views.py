@@ -10,6 +10,7 @@ from .models import Profile, Interest
 from .forms import CustomUserCreationForm, ProfileForm, InterestForm, MessageForm
 from .utils import paginateObjects, searchProfiles
 from django.db.models import Q
+from django.db import IntegrityError
 
 def landing(request):
     if request.user.is_authenticated:
@@ -58,7 +59,7 @@ def profiles(request):
 def loginUser(request):
 
     if request.user.is_authenticated:
-        return redirect('profiles')
+        return redirect('users:profiles')
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -76,7 +77,7 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             return redirect(request.GET['next'] if 'next' 
-                in request.GET else 'account')
+                in request.GET else 'users:account')
 
         else:
             messages.error(request, 

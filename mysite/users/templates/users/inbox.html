@@ -26,29 +26,31 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {% for message in messageRequests %}
-                                                                <tr style="transform: rotate(0);">
-                                                                    {% if message.is_read == False %}
-                                                                        <th scope="row">
-                                                                            <i class="uil uil-envelope text-success" style="font-size: 15px"></i><a class="text-decoration-none stretched-link"
-   href="{% url 'users:message' message.id %}"></a>
-                                                                        </th>
-                                                                        <td class="text-success fw-bold">{{ message.sender }}</td>
-                                                                        <td class="text-success fw-bold">{{ message.name }}</td>
-                                                                        <td class="text-success fw-bold">{{ message.subject }}</td>
-                                                                        <td class="text-success fw-bold">{{ message.created }}</td>
-                                                                    {% else %}
-                                                                        <th scope="row">
-                                                                            <i class="uil uil-envelope-open  text-600" style="font-size: 15px"></i><a class="text-decoration-none stretched-link text-600"
-   href="{% url 'users:message' message.id %}"></a>
-                                                                        </th>
-                                                                        <td class="text-600 fw-bold">{{ message.sender }}</td>
-                                                                        <td class="text-600 fw-bold">{{ message.name }}</td>
-                                                                        <td class="text-600 fw-bold">{{ message.subject }}</td>
-                                                                        <td class="text-600 fw-bold">{{ message.created }}</td>
-                                                                    {% endif %}
-                                                                </tr>
-                                                            {% endfor %}
+                                                        {% for message in messageRequests %}
+                                                        <tr style="position: relative;">
+                                                            <td colspan="5" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 1;">
+                                                                <a href="{% url 'users:message' message.id %}" class="stretched-link"></a>
+                                                            </td>
+
+                                                            {% if not message.is_read %}
+                                                                <th scope="row">
+                                                                    <i class="uil uil-envelope text-success" style="font-size: 15px"></i>
+                                                                </th>
+                                                                <td class="text-success fw-bold">{{ message.sender }}</td>
+                                                                <td class="text-success fw-bold">{{ message.name }}</td>
+                                                                <td class="text-success fw-bold">{{ message.subject }}</td>
+                                                                <td class="text-success fw-bold">{{ message.created }}</td>
+                                                            {% else %}
+                                                                <th scope="row">
+                                                                    <i class="uil uil-envelope-open text-600" style="font-size: 15px"></i>
+                                                                </th>
+                                                                <td class="text-600 fw-bold">{{ message.sender }}</td>
+                                                                <td class="text-600 fw-bold">{{ message.name }}</td>
+                                                                <td class="text-600 fw-bold">{{ message.subject }}</td>
+                                                                <td class="text-600 fw-bold">{{ message.created }}</td>
+                                                            {% endif %}
+                                                        </tr>
+                                                        {% endfor %}
                                                         </tbody>
                                                     </table>
                                                 </div>
